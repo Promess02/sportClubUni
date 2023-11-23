@@ -3,6 +3,7 @@ package mikolaj.project.backendapp.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import mikolaj.project.backendapp.enums.Sport;
 
 @Getter
 @Setter
@@ -23,6 +24,6 @@ public class Team {
     private String logoIconUrl;
 
     @Column(name = "sport", nullable = false)
-    private String sport;
+    private Sport sport;
 
 }

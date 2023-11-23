@@ -3,6 +3,8 @@ package mikolaj.project.backendapp.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import mikolaj.project.backendapp.enums.MembershipStatus;
+import mikolaj.project.backendapp.persistence.MembershipStatusConverter;
 
 import java.time.LocalDate;
 
@@ -22,7 +24,7 @@ public class Membership {
     private LocalDate endDate;
 
     @Column(name = "membershipStatus", nullable = false)
-    private Boolean membershipStatus = false;
+    private MembershipStatus membershipStatus = MembershipStatus.NEVER_ACQUIRED;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "MemberId", nullable = false)
@@ -40,7 +42,7 @@ public class Membership {
         startDate = LocalDate.now();
     }
 
-    public Membership(LocalDate endDate, Boolean membershipStatus, Member member, MembershipType membershipType, Activity activity) {
+    public Membership(LocalDate endDate, MembershipStatus membershipStatus, Member member, MembershipType membershipType, Activity activity) {
         this.startDate = LocalDate.now();
         this.endDate = endDate;
         this.membershipStatus = membershipStatus;

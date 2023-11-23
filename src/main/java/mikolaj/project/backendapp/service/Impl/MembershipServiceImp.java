@@ -2,6 +2,7 @@ package mikolaj.project.backendapp.service.Impl;
 
 import lombok.NoArgsConstructor;
 import mikolaj.project.backendapp.DTO.ServiceResponse;
+import mikolaj.project.backendapp.enums.MembershipStatus;
 import mikolaj.project.backendapp.model.*;
 import mikolaj.project.backendapp.repo.*;
 import mikolaj.project.backendapp.service.MembershipService;
@@ -69,7 +70,7 @@ public class MembershipServiceImp implements MembershipService {
                 "given not full access membership type with no activity provided");
 
         LocalDate membershipEndDate = LocalDate.now().plusMonths(membershipType.get().getMonths());
-        Membership newMembership = new Membership(membershipEndDate,true,member.get(),membershipType.get(),
+        Membership newMembership = new Membership(membershipEndDate, MembershipStatus.ACTIVE,member.get(),membershipType.get(),
                 activity.orElse(null));
         membershipRepo.save(newMembership);
         return new ServiceResponse<>(Optional.of(newMembership), "Membership successfully bought");

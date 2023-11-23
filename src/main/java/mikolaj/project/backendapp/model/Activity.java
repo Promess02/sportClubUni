@@ -3,6 +3,7 @@ package mikolaj.project.backendapp.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import mikolaj.project.backendapp.enums.Sport;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -32,10 +33,10 @@ public class Activity {
     private String description;
 
     @Column(name = "sport", nullable = false)
-    private String sport;
+    private Sport sport;
 
     @Column(name = "currentMembers", nullable = false)
-    private Integer currentMembers;
+    private Integer currentMembers = 0;
 
     @Column(name = "memberLimit")
     private Integer memberLimit;
@@ -52,4 +53,22 @@ public class Activity {
     @JoinColumn(name = "TeamId")
     private Team team;
 
+    public Activity() {
+    }
+    public Activity(String name, LocalDate date, LocalTime time,
+                    Integer minutes, String description, Sport sport,
+                    Integer currentMembers, Integer memberLimit, Location location,
+                    Trainer trainer, Team team) {
+        this.name = name;
+        this.date = date;
+        this.time = time;
+        this.minutes = minutes;
+        this.description = description;
+        this.sport = sport;
+        this.currentMembers = currentMembers;
+        this.memberLimit = memberLimit;
+        this.location = location;
+        this.trainer = trainer;
+        this.team = team;
+    }
 }
