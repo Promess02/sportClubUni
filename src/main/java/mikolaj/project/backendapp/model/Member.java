@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Map;
+
 @Getter
 @Setter
 @Entity
@@ -21,6 +23,7 @@ public class Member {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "UserId", nullable = false)
     private User user;
+
 
     public Member(User user) {
         this.user = user;
