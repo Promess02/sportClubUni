@@ -1,10 +1,10 @@
 server:
-  port: 8081
+  port: 8080
 spring:
   datasource:
-    password: MI21mi0933
+    password: Konikkurwapony1*
     username: miko
-    url: jdbc:mysql://localhost:3306/sportClub?characterEncoding=utf8&&useSSL=false
+    url: jdbc:mysql://localhost:3306/test_sportClub?characterEncoding=utf8&&useSSL=false
     driver-class-name: com.mysql.jdbc.Driver
   mail:
     host: smtp.gmail.com
