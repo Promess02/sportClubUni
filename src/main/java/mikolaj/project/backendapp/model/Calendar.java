@@ -44,4 +44,18 @@ public class Calendar {
     @JoinColumn(name = "ActivityId")
     private Activity activity;
 
+    public Calendar() {
+    }
+
+    public Calendar(String name, LocalDate date, LocalTime time, Integer minutes,
+                    String description, Member member, Trainer trainer, Activity activity) {
+        this.name = name;
+        this.date = date;
+        this.time = time;
+        this.minutes = minutes;
+        this.description = description;
+        this.member = member;
+        this.trainer = trainer;
+        this.activity = activity;
+    }
 }

@@ -71,4 +71,15 @@ public class Activity {
         this.trainer = trainer;
         this.team = team;
     }
+    public void signUp(){
+        currentMembers += 1;
+    }
+
+    public void cancel(){
+        currentMembers -= 1;
+    }
+
+    public boolean checkIfActivityAvailable(){
+        return currentMembers != memberLimit;
+    }
 }

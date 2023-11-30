@@ -15,6 +15,9 @@ public class MembershipType {
     @Column(name = "Id", nullable = false)
     private Integer id;
 
+    @Column(name = "name", nullable = false)
+    private String name;
+
     @Column(name = "months", nullable = false)
     private Byte months;
 
