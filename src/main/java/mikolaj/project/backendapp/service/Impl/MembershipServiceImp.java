@@ -39,8 +39,8 @@ public class MembershipServiceImp implements MembershipService {
     }
 
     @Override
-    public ServiceResponse<?> getMembershipForUser(String userEmail) {
-        ServiceResponse<?> response = checkIfUserEmailOk(userEmail);
+    public ServiceResponse<Membership> getMembershipForUser(String userEmail) {
+        ServiceResponse<Membership> response = checkIfUserEmailOk(userEmail);
         if(!response.getMessage().equals("email OK")) return response;
         User userDb = userRepo.findByEmailIgnoreCase(userEmail);
         Optional<Member> member = memberRepo.findMemberByUserId(userDb.getId());
@@ -88,7 +88,7 @@ public class MembershipServiceImp implements MembershipService {
         return new ServiceResponse<>(Optional.of(membershipList), "membership history retrieved for user");
     }
 
-    private ServiceResponse<?> checkIfUserEmailOk(String userEmail){
+    private ServiceResponse<Membership> checkIfUserEmailOk(String userEmail){
         if(userEmail==null) return new ServiceResponse<>(Optional.empty(), ServiceMessages.EMAIL_NOT_GIVEN);
         User userDb = userRepo.findByEmailIgnoreCase(userEmail);
         if(userDb== null) return new ServiceResponse<>(Optional.empty(), ServiceMessages.EMAIL_NOT_FOUND);

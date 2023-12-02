@@ -12,7 +12,7 @@ public class ServiceResponse<T> {
         this.message = message;
     }
 
-    public Optional<?> getData() {
+    public Optional<T> getData() {
         return data;
     }
 
