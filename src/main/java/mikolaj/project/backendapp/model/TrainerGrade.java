@@ -3,8 +3,6 @@ package mikolaj.project.backendapp.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import mikolaj.project.backendapp.model.Member;
-import mikolaj.project.backendapp.model.Trainer;
 
 @Getter
 @Setter

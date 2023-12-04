@@ -5,7 +5,6 @@ import mikolaj.project.backendapp.DTO.DateRange;
 import mikolaj.project.backendapp.DTO.ServiceResponse;
 import mikolaj.project.backendapp.model.Activity;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public interface ActivityService{

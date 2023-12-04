@@ -60,14 +60,16 @@ public class CalendarServiceImpl implements CalendarService {
     }
 
     @Override
-    public ServiceResponse<?> getEntriesForMember(Member member, DateRange dateRange) {
-        List<Calendar> entryList = calendarRepo.findAll();
-        if(entryList.isEmpty()) return new ServiceResponse<>(Optional.empty(),"no entries found");
-        List<Calendar> listForMember = entryList.stream().filter(calendar ->
-                calendar.getMember().equals(member) &&
-                calendar.getDate().isAfter(dateRange.getStartDate()) &&
-                calendar.getDate().isBefore(dateRange.getEndDate())).toList();
-        return new ServiceResponse<>(Optional.of(listForMember), "found entries for member");
+    public ServiceResponse<List<Calendar>> getEntriesForMember(Member member) {
+//        List<Calendar> entryList = calendarRepo.findAll();
+//        if(entryList.isEmpty()) return new ServiceResponse<>(Optional.empty(),"no entries found");
+//        List<Calendar> listForMember = entryList.stream().filter(calendar ->
+//                calendar.getMember().equals(member)).toList();
+//                calendar.getDate().isAfter(dateRange.getStartDate()) &&
+//                calendar.getDate().isBefore(dateRange.getEndDate())).toList();
+
+        List<Calendar> list = calendarRepo.findCalendarsByMember(member);
+        return new ServiceResponse<>(Optional.of(list), "found entries for member");
 
     }
 

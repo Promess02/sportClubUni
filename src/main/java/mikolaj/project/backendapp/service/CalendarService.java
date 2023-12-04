@@ -7,10 +7,12 @@ import mikolaj.project.backendapp.model.Calendar;
 import mikolaj.project.backendapp.model.Member;
 import mikolaj.project.backendapp.model.Trainer;
 
+import java.util.List;
+
 public interface CalendarService {
     ServiceResponse<?> signUpForActivity(Member member, Activity activity);
     ServiceResponse<?> createPersonalTraining(Calendar calendar);
-    ServiceResponse<?> getEntriesForMember(Member member, DateRange dateRange);
+    ServiceResponse<List<Calendar>> getEntriesForMember(Member member);
     ServiceResponse<?> getEntriesForTrainer(Trainer trainer, DateRange dateRange);
     ServiceResponse<?> cancelCalendarEntry(Calendar calendar);
 

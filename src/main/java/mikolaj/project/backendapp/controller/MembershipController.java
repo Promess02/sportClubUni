@@ -1,7 +1,5 @@
 package mikolaj.project.backendapp.controller;
 
-import lombok.RequiredArgsConstructor;
-
 import mikolaj.project.backendapp.DTO.EmailWrapper;
 import mikolaj.project.backendapp.DTO.MembershipForm;
 import mikolaj.project.backendapp.DTO.ServiceResponse;

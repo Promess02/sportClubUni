@@ -34,8 +34,7 @@ public class CalendarController {
 
     @GetMapping("/getCalendarForMember")
     public ResponseEntity<?> getCalendarForMember(@RequestBody EntriesRequest entriesRequest){
-        ServiceResponse<?> response = calendarService.getEntriesForMember(entriesRequest.getMember(),
-                entriesRequest.getDateRange());
+        ServiceResponse<?> response = calendarService.getEntriesForMember(entriesRequest.getMember());
         if(response.getData().isEmpty()) return ResponseUtil.badRequestResponse(response.getMessage());
         return ResponseUtil.okResponse(response.getMessage(), "Calendar", response.getData());
     }
