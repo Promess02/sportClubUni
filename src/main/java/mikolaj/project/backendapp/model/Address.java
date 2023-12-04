@@ -19,10 +19,10 @@ public class Address {
     @Column(name = "Street")
     private String street;
 
-    @Column(name = "houseNumber", nullable = false)
+    @Column(name = "house_number", nullable = false)
     private String houseNumber;
 
-    @Column(name = "postCode", nullable = false)
+    @Column(name = "post_code", nullable = false)
     private String postCode;
 
 }

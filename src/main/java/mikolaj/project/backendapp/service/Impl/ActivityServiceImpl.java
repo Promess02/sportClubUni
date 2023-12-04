@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class ActivityServiceImpl implements ActivityService {
-    private ActivityRepo activityRepo;
+    private  final ActivityRepo activityRepo;
 
     @Autowired
     public ActivityServiceImpl(ActivityRepo activityRepo) {
@@ -84,7 +84,7 @@ public class ActivityServiceImpl implements ActivityService {
         return team == null || activity.getTeam().equals(team);
     }
     @Override
-    public ServiceResponse<?> getAllActivities() {
+    public ServiceResponse<List<Activity>> getAllActivities() {
         List<Activity> list = activityRepo.findAll();
         if(list.isEmpty()) return new ServiceResponse<>(Optional.empty(), "no activities found");
         return new ServiceResponse<>(Optional.of(list), "activities retrieved successfully");

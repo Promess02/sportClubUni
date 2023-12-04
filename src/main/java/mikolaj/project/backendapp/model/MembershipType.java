@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "membership_type")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class MembershipType {
     @Id
@@ -27,7 +27,7 @@ public class MembershipType {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "fullAccess", nullable = false)
+    @Column(name = "full_access", nullable = false)
     private Boolean fullAccess = false;
 
     @Column(name = "discount")

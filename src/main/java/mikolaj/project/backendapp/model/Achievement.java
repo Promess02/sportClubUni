@@ -28,7 +28,7 @@ public class Achievement {
     private LocalDate date;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "TeamId", nullable = false)
+    @JoinColumn(name = "team_id", nullable = false)
     private Team team;
 
 }

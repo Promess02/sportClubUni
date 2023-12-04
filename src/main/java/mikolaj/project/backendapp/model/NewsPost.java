@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "news_post")
 public class NewsPost {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,25 +18,25 @@ public class NewsPost {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "dateOfPosting", nullable = false)
+    @Column(name = "date_of_posting", nullable = false)
     private LocalDate dateOfPosting;
 
     @Column(name = "Content", nullable = false)
     private String content;
 
-    @Column(name = "ImageUrl", nullable = false)
+    @Column(name = "image_url", nullable = false)
     private String imageUrl;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "LocationId")
+    @JoinColumn(name = "location_id")
     private Location location;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "MembershipTypeId")
+    @JoinColumn(name = "membership_type_id")
     private MembershipType membershipType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ActivityId")
+    @JoinColumn(name = "activity_id")
     private Activity activity;
 
     public NewsPost() {

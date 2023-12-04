@@ -61,9 +61,9 @@ public class RegistrationServiceImpl implements RegistrationService {
 
         if(token != null)
         {
-            User user = userRepository.findByEmailIgnoreCase(token.getUser().getEmail());
-            userRepository.save(user);
-            return new ServiceResponse<>(Optional.of(user), "Email verified successfully!");
+            Optional<User> user = userRepository.findByEmailIgnoreCase(token.getUser().getEmail());
+            userRepository.save(user.get());
+            return new ServiceResponse<>(user, "Email verified successfully!");
             //return ResponseEntity.ok("Email verified successfully!");
         }
         return new ServiceResponse<>(Optional.empty(), "Error: Couldn't verify email");

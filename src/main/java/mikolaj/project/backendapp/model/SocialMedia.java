@@ -6,24 +6,24 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "social_media")
 public class SocialMedia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id", nullable = false)
+    @Column(name = "id", nullable = false)
     private Integer id;
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "URL", nullable = false)
+    @Column(name = "url", nullable = false)
     private String url;
 
-    @Column(name = "IconUrl", nullable = false)
+    @Column(name = "icon_url", nullable = false)
     private String iconUrl;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "LocationId")
+    @JoinColumn(name = "location_id")
     private Location location;
 
 }

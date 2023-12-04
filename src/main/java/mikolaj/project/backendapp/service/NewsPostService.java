@@ -2,12 +2,15 @@ package mikolaj.project.backendapp.service;
 
 import mikolaj.project.backendapp.DTO.NewsPostForm;
 import mikolaj.project.backendapp.DTO.ServiceResponse;
+import mikolaj.project.backendapp.model.NewsPost;
+
+import java.util.List;
 
 public interface NewsPostService {
 
     ServiceResponse<?> addNewsPost(NewsPostForm newsPostForm);
 
-    ServiceResponse<?> viewAllNewsPost();
+    ServiceResponse<List<NewsPost>> viewAllNewsPost();
 
     ServiceResponse<?> viewRecentNewsPosts(int years, int months, int days);
 

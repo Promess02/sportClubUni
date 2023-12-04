@@ -32,7 +32,7 @@ public class User {
     private String profileImageUrl;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CreditCardId")
+    @JoinColumn(name = "credit_card_id")
     private CreditCard creditCard;
 
     public User() {

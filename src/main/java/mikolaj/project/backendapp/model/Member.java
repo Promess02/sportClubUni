@@ -12,16 +12,16 @@ import java.util.Map;
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "MemberId", nullable = false)
+    @Column(name = "member_id", nullable = false)
     private Integer id;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "TeamId")
+    @JoinColumn(name = "team_id")
     private Team team;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "UserId", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
 

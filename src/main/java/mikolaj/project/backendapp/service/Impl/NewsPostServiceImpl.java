@@ -63,10 +63,10 @@ public class NewsPostServiceImpl implements NewsPostService {
     }
 
     @Override
-    public ServiceResponse<?> viewAllNewsPost() {
+    public ServiceResponse<List<NewsPost>> viewAllNewsPost() {
         List<NewsPost> newsPostList = newsPostRepo.findAll();
         if(newsPostList.isEmpty()) return new ServiceResponse<>(Optional.empty(), "No news post found");
-        return new ServiceResponse<Object>(Optional.of(newsPostList),"news posts successfully retrieved");
+        return new ServiceResponse<>(Optional.of(newsPostList),"news posts successfully retrieved");
     }
 
     @Override

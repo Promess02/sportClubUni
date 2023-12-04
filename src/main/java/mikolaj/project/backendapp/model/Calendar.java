@@ -14,7 +14,7 @@ import java.time.LocalTime;
 public class Calendar {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "entryId", nullable = false)
+    @Column(name = "entry_id", nullable = false)
     private Integer id;
 
     @Column(name = "name", nullable = false)
@@ -33,15 +33,15 @@ public class Calendar {
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "MemberId")
+    @JoinColumn(name = "member_id")
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "TrainerId")
+    @JoinColumn(name = "trainer_id")
     private Trainer trainer;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ActivityId")
+    @JoinColumn(name = "activity_id")
     private Activity activity;
 
     public Calendar() {

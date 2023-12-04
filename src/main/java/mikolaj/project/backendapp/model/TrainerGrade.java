@@ -27,6 +27,9 @@ public class TrainerGrade {
     @Column(name = "grade", nullable = false)
     private Byte grade;
 
+    public TrainerGrade() {
+    }
+
     public TrainerGrade(Member member, Trainer trainer, Byte grade) {
         this.member = member;
         this.trainer = trainer;

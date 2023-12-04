@@ -30,50 +30,50 @@ public class UserServiceImpl implements UserService {
             return new ServiceResponse<>(Optional.empty(),ServiceMessages.EMAIL_NOT_GIVEN);
         if(!userRepo.existsByEmailIgnoreCase(user.getEmail()))
             return new ServiceResponse<>(Optional.empty(), ServiceMessages.EMAIL_NOT_FOUND);
-        User dbUser = userRepo.findByEmailIgnoreCase(user.getEmail());
-        if(!dbUser.getPassword().equals(user.getPassword()))
+        Optional<User> dbUser = userRepo.findByEmailIgnoreCase(user.getEmail());
+        if(!dbUser.get().getPassword().equals(user.getPassword()))
             return new ServiceResponse<>(Optional.empty(), ServiceMessages.BAD_PASSWORD);
-        return new ServiceResponse<>(Optional.of(dbUser), ServiceMessages.ACCOUNT_EXISTS);
+        return new ServiceResponse<>(dbUser, ServiceMessages.ACCOUNT_EXISTS);
     }
 
     @Override
     public ServiceResponse<User> changePassword(String email, String oldPassword, String newPassword) {
         if(!userRepo.existsByEmailIgnoreCase(email)) return new ServiceResponse<>(Optional.empty(),ServiceMessages.EMAIL_NOT_FOUND);
-        User dbUser = userRepo.findByEmailIgnoreCase(email);
-        if(!dbUser.getPassword().equals(oldPassword)) return new ServiceResponse<>(Optional.empty(),ServiceMessages.BAD_PASSWORD);
-        dbUser.setPassword(newPassword);
-        userRepo.save(dbUser);
-        return new ServiceResponse<>(Optional.of(dbUser),ServiceMessages.ACCOUNT_UPDATED);
+        Optional<User> dbUser = userRepo.findByEmailIgnoreCase(email);
+        if(!dbUser.get().getPassword().equals(oldPassword)) return new ServiceResponse<>(Optional.empty(),ServiceMessages.BAD_PASSWORD);
+        dbUser.get().setPassword(newPassword);
+        userRepo.save(dbUser.get());
+        return new ServiceResponse<>(dbUser,ServiceMessages.ACCOUNT_UPDATED);
     }
 
     @Override
     public ServiceResponse<User> changePhoneNumber(String email, String phoneNumber) {
         if(!userRepo.existsByEmailIgnoreCase(email)) return new ServiceResponse<>(Optional.empty(),ServiceMessages.EMAIL_NOT_FOUND);
-        User dbUser = userRepo.findByEmailIgnoreCase(email);
-        dbUser.setPhoneNumber(phoneNumber);
-        userRepo.save(dbUser);
-        return new ServiceResponse<>(Optional.of(dbUser),ServiceMessages.ACCOUNT_UPDATED);
+        Optional<User> dbUser = userRepo.findByEmailIgnoreCase(email);
+        dbUser.get().setPhoneNumber(phoneNumber);
+        userRepo.save(dbUser.get());
+        return new ServiceResponse<>(dbUser,ServiceMessages.ACCOUNT_UPDATED);
     }
 
     @Override
     public ServiceResponse<User> addCreditCard(String email, CreditCard creditCard) {
         if(!userRepo.existsByEmailIgnoreCase(email)) return new ServiceResponse<>(Optional.empty(),ServiceMessages.EMAIL_NOT_FOUND);
-        User dbUser = userRepo.findByEmailIgnoreCase(email);
+        Optional<User> dbUser = userRepo.findByEmailIgnoreCase(email);
         if(creditCardRepo.existsCreditCardByNumber(creditCard.getNumber())) return new ServiceResponse<>(Optional.empty(),
                 "Credit card with that number already exists in the database");
         creditCardRepo.save(creditCard);
-        dbUser.setCreditCard(creditCard);
-        userRepo.save(dbUser);
-        return new ServiceResponse<>(Optional.of(dbUser), ServiceMessages.ACCOUNT_UPDATED);
+        dbUser.get().setCreditCard(creditCard);
+        userRepo.save(dbUser.get());
+        return new ServiceResponse<>(dbUser, ServiceMessages.ACCOUNT_UPDATED);
     }
 
     @Override
     public ServiceResponse<User> addProfileImage(String email, String imageUrl) {
         if(!userRepo.existsByEmailIgnoreCase(email)) return new ServiceResponse<>(Optional.empty(),ServiceMessages.EMAIL_NOT_FOUND);
-        User dbUser = userRepo.findByEmailIgnoreCase(email);
-        dbUser.setProfileImageUrl(imageUrl);
-        userRepo.save(dbUser);
-        return new ServiceResponse<>(Optional.of(dbUser),ServiceMessages.ACCOUNT_UPDATED);
+        Optional<User> dbUser = userRepo.findByEmailIgnoreCase(email);
+        dbUser.get().setProfileImageUrl(imageUrl);
+        userRepo.save(dbUser.get());
+        return new ServiceResponse<>(dbUser,ServiceMessages.ACCOUNT_UPDATED);
     }
 
 

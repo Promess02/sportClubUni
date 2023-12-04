@@ -4,7 +4,8 @@ import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 import mikolaj.project.backendapp.enums.MembershipStatus;
 
-@Converter(autoApply = true)
+//@Converter(autoApply = true)
+@Converter
 public class MembershipStatusConverter implements AttributeConverter<MembershipStatus, String> {
     @Override
     public String convertToDatabaseColumn(MembershipStatus membershipStatus) {

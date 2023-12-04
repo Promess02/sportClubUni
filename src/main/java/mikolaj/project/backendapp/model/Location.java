@@ -18,26 +18,26 @@ public class Location {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "maxCapacity", nullable = false)
+    @Column(name = "max_capacity", nullable = false)
     private Integer maxCapacity;
 
-    @Column(name = "currentCapacity", nullable = false)
+    @Column(name = "current_capacity", nullable = false)
     private Integer currentCapacity;
 
-    @Column(name = "weekDayOpenTime", nullable = false)
+    @Column(name = "week_day_open_time", nullable = false)
     private LocalTime weekDayOpenTime;
 
-    @Column(name = "weekDayCloseTime", nullable = false)
+    @Column(name = "week_day_close_time", nullable = false)
     private LocalTime weekDayCloseTime;
 
-    @Column(name = "weekendOpenTime", nullable = false)
+    @Column(name = "weekend_open_time", nullable = false)
     private LocalTime weekendOpenTime;
 
-    @Column(name = "weekendCloseTime", nullable = false)
+    @Column(name = "weekend_close_time", nullable = false)
     private LocalTime weekendCloseTime;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "AddressId", nullable = false)
+    @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
 }

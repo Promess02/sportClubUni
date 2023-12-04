@@ -4,9 +4,11 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import mikolaj.project.backendapp.enums.Sport;
+import mikolaj.project.backendapp.persistence.SportConverter;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -33,24 +35,25 @@ public class Activity {
     private String description;
 
     @Column(name = "sport", nullable = false)
+    @Convert(converter = SportConverter.class)
     private Sport sport;
 
-    @Column(name = "currentMembers", nullable = false)
+    @Column(name = "current_members", nullable = false)
     private Integer currentMembers = 0;
 
-    @Column(name = "memberLimit")
+    @Column(name = "member_limit")
     private Integer memberLimit;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "LocationId", nullable = false)
+    @JoinColumn(name = "location_id", nullable = false)
     private Location location;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "TrainerId", nullable = false)
+    @JoinColumn(name = "trainer_id", nullable = false)
     private Trainer trainer;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "TeamId")
+    @JoinColumn(name = "team_id")
     private Team team;
 
     public Activity() {
@@ -80,6 +83,6 @@ public class Activity {
     }
 
     public boolean checkIfActivityAvailable(){
-        return currentMembers != memberLimit;
+        return !Objects.equals(currentMembers, memberLimit);
     }
 }

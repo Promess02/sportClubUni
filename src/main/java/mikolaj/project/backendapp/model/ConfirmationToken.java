@@ -12,21 +12,21 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "ConfirmationToken")
+@Table(name = "confirmation_token")
 public class ConfirmationToken {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "tokenId")
+    @Column(name = "token_id")
     private Integer id;
 
-    @Column(name = "confirmationToken")
+    @Column(name = "confirmation_token")
     private String confirmationToken;
 
-    @Column(name = "createdDate")
+    @Column(name = "created_date")
     private Instant createdDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "user_id")
     private User user;
 
     public ConfirmationToken(User user) {

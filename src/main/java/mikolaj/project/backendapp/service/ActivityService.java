@@ -6,6 +6,7 @@ import mikolaj.project.backendapp.DTO.ServiceResponse;
 import mikolaj.project.backendapp.model.Activity;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public interface ActivityService{
     //trainer and admin
@@ -14,7 +15,7 @@ public interface ActivityService{
     ServiceResponse<?> deleteActivity(Activity activity);
     // client
     ServiceResponse<?> getFilteredActivities(ActivityFilterForm activityFilterForm);
-    ServiceResponse<?> getAllActivities();
+    ServiceResponse<List<Activity>> getAllActivities();
     ServiceResponse<?> getAllActivitiesBetweenDates(DateRange dateRange);
 
     ServiceResponse<?> checkIfActivityAvailable(Activity activity);

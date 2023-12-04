@@ -11,7 +11,7 @@ import org.springframework.cglib.transform.impl.InterceptFieldCallback;
 public class Trainer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "TrainerId", nullable = false)
+    @Column(name = "trainer_id", nullable = false)
     private Integer id;
 
     @Column(name = "Specialization", nullable = false)
@@ -27,11 +27,11 @@ public class Trainer {
     private Integer numOfGrades;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "TeamId", nullable = false)
+    @JoinColumn(name = "team_id", nullable = false)
     private Team team;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "UserId", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     public void addGrade(Byte grade){

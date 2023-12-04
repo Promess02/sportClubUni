@@ -17,25 +17,26 @@ public class Membership {
     @Column(name = "Id", nullable = false)
     private Integer id;
 
-    @Column(name = "startDate", nullable = false)
+    @Column(name = "start_date", nullable = false)
     private LocalDate startDate;
 
-    @Column(name = "endDate", nullable = false)
+    @Column(name = "end_date", nullable = false)
     private LocalDate endDate;
 
-    @Column(name = "membershipStatus", nullable = false)
+    @Column(name = "membership_status", nullable = false)
+    @Convert(converter = MembershipStatusConverter.class)
     private MembershipStatus membershipStatus = MembershipStatus.NEVER_ACQUIRED;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "MemberId", nullable = false)
+    @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "MembershipTypeId", nullable = false)
+    @JoinColumn(name = "membership_type_id", nullable = false)
     private MembershipType membershipType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ActivityId")
+    @JoinColumn(name = "activity_id")
     private Activity activity;
 
     public Membership() {

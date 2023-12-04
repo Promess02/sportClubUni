@@ -42,10 +42,10 @@ public class MembershipServiceImp implements MembershipService {
     public ServiceResponse<Membership> getMembershipForUser(String userEmail) {
         ServiceResponse<Membership> response = checkIfUserEmailOk(userEmail);
         if(!response.getMessage().equals("email OK")) return response;
-        User userDb = userRepo.findByEmailIgnoreCase(userEmail);
-        Optional<Member> member = memberRepo.findMemberByUserId(userDb.getId());
+        Optional<User> userDb = userRepo.findByEmailIgnoreCase(userEmail);
+        Optional<Member> member = memberRepo.findMemberByUserId(userDb.get().getId());
         if(member.isEmpty()) return new ServiceResponse<>(Optional.empty(), "user with given email has never bought a membership");
-        Optional<Membership> membership = membershipRepo.findMembershipByMemberIdAndMembershipStatusIsTrue(member.get().getId());
+        Optional<Membership> membership = membershipRepo.findMembershipByMemberIdAndMembershipStatusEquals(member.get().getId(), MembershipStatus.ACTIVE);
         if(membership.isEmpty()) return new ServiceResponse<>(Optional.empty(),"member has no active membership");
         return new ServiceResponse<>(membership, "Membership found");
     }
@@ -54,14 +54,14 @@ public class MembershipServiceImp implements MembershipService {
     public ServiceResponse<?> buyMembership(String userEmail, String membershipDescription, String activityName) {
         ServiceResponse<?> response = checkIfUserEmailOk(userEmail);
         if(!response.getMessage().equals("email OK")) return response;
-        User userDb = userRepo.findByEmailIgnoreCase(userEmail);
-        Optional<Member> member = memberRepo.findMemberByUserId(userDb.getId());
+        Optional<User> userDb = userRepo.findByEmailIgnoreCase(userEmail);
+        Optional<Member> member = memberRepo.findMemberByUserId(userDb.get().getId());
         if(member.isEmpty()){
-            Member newMember = new Member(userDb);
+            Member newMember = new Member(userDb.get());
             memberRepo.save(newMember);
             member = Optional.of(newMember);
         }
-        Optional<Membership> membership = membershipRepo.findMembershipByMemberIdAndMembershipStatusIsTrue(member.get().getId());
+        Optional<Membership> membership = membershipRepo.findMembershipByMemberIdAndMembershipStatusEquals(member.get().getId(), MembershipStatus.ACTIVE);
         if(membership.isPresent()) return new ServiceResponse<>(Optional.empty(),"member has an active membership already");
         Optional<MembershipType> membershipType = membershipTypeRepo.findMembershipTypeByDescription(membershipDescription);
         if(membershipType.isEmpty()) return new ServiceResponse<>(Optional.empty(), "No membership type found with given description");
@@ -80,8 +80,8 @@ public class MembershipServiceImp implements MembershipService {
     public ServiceResponse<?> getUserMembershipHistory(String userEmail) {
         ServiceResponse<?> response = checkIfUserEmailOk(userEmail);
         if(!response.getMessage().equals("email OK")) return response;
-        User userDb = userRepo.findByEmailIgnoreCase(userEmail);
-        Optional<Member> member = memberRepo.findMemberByUserId(userDb.getId());
+        Optional<User> userDb = userRepo.findByEmailIgnoreCase(userEmail);
+        Optional<Member> member = memberRepo.findMemberByUserId(userDb.get().getId());
         if(member.isEmpty()) return new ServiceResponse<>(Optional.empty(), "user with given email has never bought a membership");
         Optional<List<Membership>> membershipList = membershipRepo.findMembershipsByMemberId(member.get().getId());
         if(membershipList.isEmpty()) return new ServiceResponse<>(Optional.empty(), "no memberships found for user");
@@ -90,7 +90,7 @@ public class MembershipServiceImp implements MembershipService {
 
     private ServiceResponse<Membership> checkIfUserEmailOk(String userEmail){
         if(userEmail==null) return new ServiceResponse<>(Optional.empty(), ServiceMessages.EMAIL_NOT_GIVEN);
-        User userDb = userRepo.findByEmailIgnoreCase(userEmail);
+        Optional<User> userDb = userRepo.findByEmailIgnoreCase(userEmail);
         if(userDb== null) return new ServiceResponse<>(Optional.empty(), ServiceMessages.EMAIL_NOT_FOUND);
         return new ServiceResponse<>(Optional.empty(), "email OK");
     }

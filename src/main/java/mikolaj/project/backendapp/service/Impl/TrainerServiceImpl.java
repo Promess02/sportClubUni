@@ -32,7 +32,7 @@ private final TeamRepo teamRepo;
         if(userDb.isEmpty()) {
             //add user if he isn't already in db
             userRepo.save(user);
-            userDb = Optional.ofNullable(userRepo.findByEmailIgnoreCase(user.getEmail()));
+            userDb = userRepo.findByEmailIgnoreCase(user.getEmail());
             if(userDb.isEmpty()) return new ServiceResponse<>(Optional.empty(), "failed saving user");
         }
         trainer.setUser(userDb.get());

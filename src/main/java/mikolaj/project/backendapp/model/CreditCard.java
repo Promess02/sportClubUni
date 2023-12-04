@@ -10,13 +10,13 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "credit_card")
 //TODO - fix LocalDateConverter so that credit card can be viewed in json
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class CreditCard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id", nullable = false)
+    @Column(name = "id", nullable = false)
     private Integer id;
 
     @Column(name = "number", nullable = false)
