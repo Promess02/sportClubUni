@@ -61,16 +61,8 @@ public class CalendarServiceImpl implements CalendarService {
 
     @Override
     public ServiceResponse<List<Calendar>> getEntriesForMember(Member member) {
-//        List<Calendar> entryList = calendarRepo.findAll();
-//        if(entryList.isEmpty()) return new ServiceResponse<>(Optional.empty(),"no entries found");
-//        List<Calendar> listForMember = entryList.stream().filter(calendar ->
-//                calendar.getMember().equals(member)).toList();
-//                calendar.getDate().isAfter(dateRange.getStartDate()) &&
-//                calendar.getDate().isBefore(dateRange.getEndDate())).toList();
-
         List<Calendar> list = calendarRepo.findCalendarsByMember(member);
         return new ServiceResponse<>(Optional.of(list), "found entries for member");
-
     }
 
     @Override
@@ -105,5 +97,12 @@ public class CalendarServiceImpl implements CalendarService {
         calendarDb = calendarRepo.findById(calendar.getId());
         if (calendarDb.isEmpty()) return new ServiceResponse<>(Optional.of(calendar), "entry cancelled successfully");
         return new ServiceResponse<>(Optional.empty(), "failed deleting calendar entry");
+    }
+
+    @Override
+    public ServiceResponse<?> checkIfMemberAlreadySigned(Activity activity, Member member) {
+        List<Calendar> calendarList = calendarRepo.findCalendarsByActivityAndMember(activity,member);
+        if(calendarList.isEmpty()) return new ServiceResponse<Object>(Optional.of(false), "member not signed to activity yet");
+        return new ServiceResponse<Object>(Optional.of(true), "member already signed to activity");
     }
 }

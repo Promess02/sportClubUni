@@ -22,7 +22,7 @@ public class SocialMedia {
     @Column(name = "icon_url", nullable = false)
     private String iconUrl;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "location_id")
     private Location location;
 

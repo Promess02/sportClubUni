@@ -44,15 +44,15 @@ public class Activity {
     @Column(name = "member_limit")
     private Integer memberLimit;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "location_id", nullable = false)
     private Location location;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "trainer_id", nullable = false)
     private Trainer trainer;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "team_id")
     private Team team;
 
@@ -80,6 +80,19 @@ public class Activity {
 
     public void cancel(){
         currentMembers -= 1;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Activity activity = (Activity) o;
+        return Objects.equals(id, activity.id) && Objects.equals(name, activity.name) && Objects.equals(date, activity.date) && Objects.equals(time, activity.time) && Objects.equals(minutes, activity.minutes) && Objects.equals(description, activity.description) && sport == activity.sport && Objects.equals(currentMembers, activity.currentMembers) && Objects.equals(memberLimit, activity.memberLimit) && Objects.equals(location, activity.location) && Objects.equals(trainer, activity.trainer) && Objects.equals(team, activity.team);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, date, time, minutes, description, sport, currentMembers, memberLimit, location, trainer, team);
     }
 
     public boolean checkIfActivityAvailable(){

@@ -36,7 +36,7 @@ public class Location {
     @Column(name = "weekend_close_time", nullable = false)
     private LocalTime weekendCloseTime;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 

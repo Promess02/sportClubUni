@@ -15,5 +15,6 @@ public interface CalendarService {
     ServiceResponse<List<Calendar>> getEntriesForMember(Member member);
     ServiceResponse<?> getEntriesForTrainer(Trainer trainer, DateRange dateRange);
     ServiceResponse<?> cancelCalendarEntry(Calendar calendar);
+    ServiceResponse<?> checkIfMemberAlreadySigned(Activity activity, Member member);
 
 }

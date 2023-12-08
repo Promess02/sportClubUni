@@ -1,6 +1,7 @@
 package mikolaj.project.backendapp.repo.SQL;
 
 
+import mikolaj.project.backendapp.model.Activity;
 import mikolaj.project.backendapp.model.Calendar;
 import mikolaj.project.backendapp.model.Member;
 import mikolaj.project.backendapp.model.Trainer;
@@ -17,4 +18,6 @@ public interface CalendarRepoSQL extends JpaRepository<Calendar, Long>, Calendar
 
     @Override
     List<Calendar> findCalendarsByMember(Member member);
+    @Override
+    List<Calendar> findCalendarsByActivityAndMember(Activity activity, Member member);
 }

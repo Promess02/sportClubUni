@@ -31,7 +31,7 @@ public class User {
     @Column(name = "profile_image_URL")
     private String profileImageUrl;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "credit_card_id")
     private CreditCard creditCard;
 
