@@ -43,10 +43,8 @@ public class Calendar {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "activity_id")
     private Activity activity;
-
     public Calendar() {
     }
-
     public Calendar(String name, LocalDate date, LocalTime time, Integer minutes,
                     String description, Member member, Trainer trainer, Activity activity) {
         this.name = name;
