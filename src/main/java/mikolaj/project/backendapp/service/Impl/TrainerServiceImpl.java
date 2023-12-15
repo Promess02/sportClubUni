@@ -84,6 +84,7 @@ private final TeamRepo teamRepo;
         }
         else{
             trainerUpdated.changeGrade(trainerGrade.get().getGrade(), grade);
+            trainerGradeRepo.delete(trainerGrade.get());
             trainerGradeRepo.save(new TrainerGrade(member,trainer,grade));
         }
         trainerRepo.save(trainerUpdated);
