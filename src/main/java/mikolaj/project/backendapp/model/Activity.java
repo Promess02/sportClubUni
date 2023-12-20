@@ -95,6 +95,11 @@ public class Activity {
         return Objects.hash(id, name, date, time, minutes, description, sport, currentMembers, memberLimit, location, trainer, team);
     }
 
+    @Override
+    public String toString() {
+        return getName();
+    }
+
     public boolean checkIfActivityAvailable(){
         return !Objects.equals(currentMembers, memberLimit);
     }

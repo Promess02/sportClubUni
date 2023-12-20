@@ -28,4 +28,8 @@ public class Team {
     @Convert(converter = SportConverter.class)
     private Sport sport;
 
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

@@ -40,4 +40,8 @@ public class Location {
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

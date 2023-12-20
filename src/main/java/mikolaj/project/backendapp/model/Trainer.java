@@ -47,7 +47,13 @@ public class Trainer {
     public Trainer() {
     }
 
+
     public Trainer(String specialization) {
         this.specialization = specialization;
+    }
+
+    @Override
+    public String toString() {
+        return getUser().getName() + " " + getUser().getSurname();
     }
 }

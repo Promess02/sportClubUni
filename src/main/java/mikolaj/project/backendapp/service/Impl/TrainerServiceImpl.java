@@ -36,6 +36,9 @@ private final TeamRepo teamRepo;
             if(userDb.isEmpty()) return new ServiceResponse<>(Optional.empty(), "failed saving user");
         }
         trainer.setUser(userDb.get());
+        trainer.setGrade(0d);
+        trainer.setNumOfGrades(0);
+        trainer.setSumOfGrades(0);
         trainerRepo.save(trainer);
         return new ServiceResponse<Object>(Optional.of(trainer), "successfully added a trainer");
     }

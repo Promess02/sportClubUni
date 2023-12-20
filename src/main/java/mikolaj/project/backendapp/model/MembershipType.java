@@ -33,4 +33,8 @@ public class MembershipType {
     @Column(name = "discount")
     private Double discount;
 
+    @Override
+    public String toString() {
+        return getName();
+    }
 }
