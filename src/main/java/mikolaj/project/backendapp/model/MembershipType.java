@@ -30,6 +30,7 @@ public class MembershipType {
     @Column(name = "full_access", nullable = false)
     private Boolean fullAccess = false;
 
+
     @Column(name = "discount")
     private Double discount;
 
