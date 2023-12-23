@@ -25,4 +25,10 @@ public class Address {
     @Column(name = "post_code", nullable = false)
     private String postCode;
 
+    @Override
+    public String toString() {
+        return city + ", " + street +
+                " " + houseNumber +
+                ", " + postCode;
+    }
 }
