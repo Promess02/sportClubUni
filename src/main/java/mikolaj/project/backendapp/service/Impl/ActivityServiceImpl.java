@@ -29,10 +29,10 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     public ServiceResponse<?> addActivity(Activity activity) {
+        Optional<Activity> dateActivity = activityRepo.findActivityByDate(activity.getDate());
+        if(dateActivity.isPresent()) return new ServiceResponse<>(Optional.empty(), "activity with that date exists");
         activityRepo.save(activity);
-        Optional<Activity> activitySaved = activityRepo.findActivityByName(activity.getName());
-        if(activitySaved.isEmpty()) return new ServiceResponse<>(Optional.empty(),"saving activity failed");
-        return new ServiceResponse<>(activitySaved, "activity saved successfully");
+        return new ServiceResponse<>(Optional.of(activity), "activity saved successfully");
     }
 
     @Override
