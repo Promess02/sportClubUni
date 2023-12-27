@@ -25,7 +25,7 @@ public class Trainer {
     @Column(name = "num_of_grades", nullable = false)
     private Integer numOfGrades;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "team_id", nullable = false)
     private Team team;
 
