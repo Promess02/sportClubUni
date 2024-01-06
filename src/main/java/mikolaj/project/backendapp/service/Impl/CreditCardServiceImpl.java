@@ -28,7 +28,6 @@ public class CreditCardServiceImpl implements CreditCardService {
         user.setCreditCard(creditCard);
         creditCardRepo.save(creditCard);
         userRepo.save(user);
-        //else return new ServiceResponse<>(Optional.empty(),"user not found in the database");
         return new ServiceResponse<>(Optional.of(creditCard), "credit card saved");
     }
 

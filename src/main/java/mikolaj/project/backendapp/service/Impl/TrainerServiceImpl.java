@@ -8,6 +8,7 @@ import mikolaj.project.backendapp.service.TrainerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,13 +19,15 @@ private final TrainerRepo trainerRepo;
 private final TrainerGradeRepo trainerGradeRepo;
 private final MemberRepo memberRepo;
 private final TeamRepo teamRepo;
+private final CalendarRepo calendarRepo;
 @Autowired
-    public TrainerServiceImpl(UserRepo userRepo, TrainerRepo trainerRepo, TrainerGradeRepo trainerGradeRepo, MemberRepo memberRepo, TeamRepo teamRepo) {
+    public TrainerServiceImpl(CalendarRepo calendarRepo, UserRepo userRepo, TrainerRepo trainerRepo, TrainerGradeRepo trainerGradeRepo, MemberRepo memberRepo, TeamRepo teamRepo) {
         this.userRepo = userRepo;
         this.trainerRepo = trainerRepo;
         this.trainerGradeRepo = trainerGradeRepo;
     this.memberRepo = memberRepo;
     this.teamRepo = teamRepo;
+    this.calendarRepo = calendarRepo;
 }
     @Override
     public ServiceResponse<?> addTrainer(User user, Trainer trainer) {
@@ -42,6 +45,7 @@ private final TeamRepo teamRepo;
         trainerRepo.save(trainer);
         return new ServiceResponse<Object>(Optional.of(trainer), "successfully added a trainer");
     }
+
 
     @Override
     public ServiceResponse<?> getTrainerInfo(Trainer trainer) {
@@ -111,5 +115,11 @@ private final TeamRepo teamRepo;
         trainerRepo.save(trainer);
         trainerDb = trainerRepo.findById(trainer.getId());
         return new ServiceResponse<>(trainerDb, "trainer updated successfully");
+    }
+
+    @Override
+    public ServiceResponse<List<Calendar>> getTrainerCalendar(Trainer trainer, LocalDate date) {
+        List<Calendar> calendarList = calendarRepo.findCalendarsByTrainerAndDate(trainer,date);
+        return new ServiceResponse<>(Optional.of(calendarList), "successfully retrieved calendars for date");
     }
 }

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Getter
 @Setter
 @Entity
@@ -50,6 +52,18 @@ public class Trainer {
 
     public Trainer(String specialization) {
         this.specialization = specialization;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Trainer trainer)) return false;
+        return Objects.equals(id, trainer.id) && Objects.equals(specialization, trainer.specialization) && Objects.equals(grade, trainer.grade) && Objects.equals(sumOfGrades, trainer.sumOfGrades) && Objects.equals(numOfGrades, trainer.numOfGrades) && Objects.equals(team, trainer.team) && Objects.equals(user, trainer.user);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, specialization, grade, sumOfGrades, numOfGrades, team, user);
     }
 
     @Override

@@ -6,6 +6,8 @@ import lombok.Setter;
 import mikolaj.project.backendapp.enums.Sport;
 import mikolaj.project.backendapp.persistence.SportConverter;
 
+import java.util.Objects;
+
 @Getter
 @Setter
 @Entity
@@ -27,6 +29,18 @@ public class Team {
     @Column(name = "sport", nullable = false)
     @Convert(converter = SportConverter.class)
     private Sport sport;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Team team)) return false;
+        return Objects.equals(id, team.id) && Objects.equals(name, team.name) && Objects.equals(maxMembers, team.maxMembers) && Objects.equals(logoIconUrl, team.logoIconUrl) && sport == team.sport;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, maxMembers, logoIconUrl, sport);
+    }
 
     @Override
     public String toString() {

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Getter
 @Setter
 @Entity
@@ -49,6 +51,18 @@ public class User {
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User user)) return false;
+        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(surname, user.surname) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(phoneNumber, user.phoneNumber) && Objects.equals(profileImageUrl, user.profileImageUrl) && Objects.equals(creditCard, user.creditCard);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, surname, email, password, phoneNumber, profileImageUrl, creditCard);
     }
 
     @Override

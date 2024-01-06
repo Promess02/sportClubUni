@@ -21,12 +21,14 @@ import java.util.Set;
 
 @Service
 public class CalendarServiceImpl implements CalendarService {
-    private ActivityRepo activityRepo;
-    private CalendarRepo calendarRepo;
-    private MemberRepo memberRepo;
-    private TrainerRepo trainerRepo;
+    private final ActivityRepo activityRepo;
+    private final CalendarRepo calendarRepo;
+    private final MemberRepo memberRepo;
+    private final TrainerRepo trainerRepo;
     @Autowired
-    public CalendarServiceImpl(ActivityRepo activityRepo, CalendarRepo calendarRepo, MemberRepo memberRepo, TrainerRepo trainerRepo) {
+    public CalendarServiceImpl(ActivityRepo activityRepo,
+                               CalendarRepo calendarRepo,
+                               MemberRepo memberRepo, TrainerRepo trainerRepo) {
         this.activityRepo = activityRepo;
         this.calendarRepo = calendarRepo;
         this.memberRepo = memberRepo;
@@ -39,6 +41,11 @@ public class CalendarServiceImpl implements CalendarService {
         if(memberDb.isEmpty()) return new ServiceResponse<>(Optional.empty(), "no member found");
         Optional<Activity> activityDb = activityRepo.findById(activity.getId());
         if(activityDb.isEmpty()) return new ServiceResponse<>(Optional.empty(),"no activity found");
+        List<Calendar> calendarList = calendarRepo.findCalendarsByActivityAndMemberAndDate(activity,member,activity.getDate());
+        for(Calendar calendar: calendarList)
+            if(calendar.getTime().isAfter(activity.getTime()) &&
+                    calendar.getTime().isBefore(activity.getTime().plusMinutes(activity.getMinutes())))
+                return new ServiceResponse<>(Optional.empty(), "member is busy");
         activity.signUp();
         activityRepo.save(activity);
         Calendar calendar = new Calendar(activity.getName(), activity.getDate(), activity.getTime(),
@@ -66,22 +73,9 @@ public class CalendarServiceImpl implements CalendarService {
     }
 
     @Override
-    public ServiceResponse<?> getEntriesForTrainer(Trainer trainer, DateRange dateRange) {
-        List<Calendar> entryList = calendarRepo.findAll();
-        if (entryList.isEmpty()) {
-            return new ServiceResponse<>(Optional.empty(), "No entries found");
-        }
-
-        Set<Activity> uniqueActivities = new HashSet<>();
-
-        List<Calendar> listForTrainer = entryList.stream()
-                .filter(calendar -> calendar.getTrainer().equals(trainer) &&
-                        calendar.getDate().isAfter(dateRange.getStartDate()) &&
-                        calendar.getDate().isBefore(dateRange.getEndDate()))
-                .filter(calendar -> uniqueActivities.add(calendar.getActivity())) // Add activity to set
-                .toList();
-
-        return new ServiceResponse<>(Optional.of(listForTrainer), "Found entries for trainer");
+    public ServiceResponse<List<Calendar>> getEntriesForTrainer(Trainer trainer) {
+        List<Calendar> list = calendarRepo.findCalendarsByTrainer(trainer);
+        return new ServiceResponse<>(Optional.of(list), "Found entries for trainer");
     }
 
 

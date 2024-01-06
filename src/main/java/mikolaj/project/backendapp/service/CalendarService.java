@@ -13,7 +13,7 @@ public interface CalendarService {
     ServiceResponse<?> signUpForActivity(Member member, Activity activity);
     ServiceResponse<?> createPersonalTraining(Calendar calendar);
     ServiceResponse<List<Calendar>> getEntriesForMember(Member member);
-    ServiceResponse<?> getEntriesForTrainer(Trainer trainer, DateRange dateRange);
+    ServiceResponse<List<Calendar>> getEntriesForTrainer(Trainer trainer);
     ServiceResponse<?> cancelCalendarEntry(Calendar calendar);
     ServiceResponse<?> checkIfMemberAlreadySigned(Activity activity, Member member);
 

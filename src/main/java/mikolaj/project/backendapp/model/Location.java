@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalTime;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -43,5 +44,17 @@ public class Location {
     @Override
     public String toString() {
         return getName();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Location location)) return false;
+        return Objects.equals(id, location.id) && Objects.equals(name, location.name) && Objects.equals(maxCapacity, location.maxCapacity) && Objects.equals(currentCapacity, location.currentCapacity) && Objects.equals(weekDayOpenTime, location.weekDayOpenTime) && Objects.equals(weekDayCloseTime, location.weekDayCloseTime) && Objects.equals(weekendOpenTime, location.weekendOpenTime) && Objects.equals(weekendCloseTime, location.weekendCloseTime) && Objects.equals(address, location.address);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, maxCapacity, currentCapacity, weekDayOpenTime, weekDayCloseTime, weekendOpenTime, weekendCloseTime, address);
     }
 }

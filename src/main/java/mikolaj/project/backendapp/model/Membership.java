@@ -7,6 +7,7 @@ import mikolaj.project.backendapp.enums.MembershipStatus;
 import mikolaj.project.backendapp.persistence.MembershipStatusConverter;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -50,5 +51,17 @@ public class Membership {
         this.member = member;
         this.membershipType = membershipType;
         this.activity = activity;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Membership that)) return false;
+        return Objects.equals(id, that.id) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate) && membershipStatus == that.membershipStatus && Objects.equals(member, that.member) && Objects.equals(membershipType, that.membershipType) && Objects.equals(activity, that.activity);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, startDate, endDate, membershipStatus, member, membershipType, activity);
     }
 }

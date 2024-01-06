@@ -1,10 +1,10 @@
 package mikolaj.project.backendapp.service;
 
 import mikolaj.project.backendapp.DTO.ServiceResponse;
-import mikolaj.project.backendapp.model.Member;
-import mikolaj.project.backendapp.model.Team;
-import mikolaj.project.backendapp.model.Trainer;
-import mikolaj.project.backendapp.model.User;
+import mikolaj.project.backendapp.model.*;
+
+import java.time.LocalDate;
+import java.util.List;
 
 public interface TrainerService {
     ServiceResponse<?> addTrainer(User user, Trainer trainer);
@@ -14,4 +14,6 @@ public interface TrainerService {
     ServiceResponse<?> gradeTrainer(Trainer trainer, Byte grade, Member member);
     ServiceResponse<?> deleteTrainer(Trainer trainer);
     ServiceResponse<?> updateTrainer(Trainer trainer);
+
+    ServiceResponse<List<Calendar>> getTrainerCalendar(Trainer trainer, LocalDate date);
 }

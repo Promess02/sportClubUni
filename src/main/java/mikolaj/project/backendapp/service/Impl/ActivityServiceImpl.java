@@ -4,11 +4,9 @@ import mikolaj.project.backendapp.DTO.ActivityFilterForm;
 import mikolaj.project.backendapp.DTO.DateRange;
 import mikolaj.project.backendapp.DTO.ServiceResponse;
 import mikolaj.project.backendapp.enums.Sport;
-import mikolaj.project.backendapp.model.Activity;
-import mikolaj.project.backendapp.model.Location;
-import mikolaj.project.backendapp.model.Team;
-import mikolaj.project.backendapp.model.Trainer;
+import mikolaj.project.backendapp.model.*;
 import mikolaj.project.backendapp.repo.ActivityRepo;
+import mikolaj.project.backendapp.repo.CalendarRepo;
 import mikolaj.project.backendapp.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,17 +19,34 @@ import java.util.stream.Collectors;
 @Service
 public class ActivityServiceImpl implements ActivityService {
     private  final ActivityRepo activityRepo;
+    private final CalendarRepo calendarRepo;
 
     @Autowired
-    public ActivityServiceImpl(ActivityRepo activityRepo) {
+    public ActivityServiceImpl(ActivityRepo activityRepo, CalendarRepo calendarRepo) {
         this.activityRepo = activityRepo;
+        this.calendarRepo = calendarRepo;
     }
 
     @Override
     public ServiceResponse<?> addActivity(Activity activity) {
-        Optional<Activity> dateActivity = activityRepo.findActivityByDate(activity.getDate());
-        if(dateActivity.isPresent()) return new ServiceResponse<>(Optional.empty(), "activity with that date exists");
+        List<Activity> locationList =
+                activityRepo.findActivitiesByLocationAndDate(activity.getLocation(),activity.getDate());
+        List<Calendar> trainerList =
+                calendarRepo.findCalendarsByTrainerAndDate(activity.getTrainer(),activity.getDate());
+
+        for(Activity activityDb: locationList)
+            if(activity.getTime().isAfter(activityDb.getTime()) &&
+                    activity.getTime().isBefore(activityDb.getTime().plusMinutes(activityDb.getMinutes())))
+                return new ServiceResponse<>(Optional.empty(),"location is busy during that time");
+
+        for(Calendar calendar: trainerList)
+            if(activity.getTime().isAfter(calendar.getTime()) &&
+                    activity.getTime().isBefore(calendar.getTime().plusMinutes(calendar.getMinutes())))
+                return new ServiceResponse<>(Optional.empty(),"trainer is busy during that time");
+
+        Calendar calendar = new Calendar(activity.getName(), activity.getDate(), activity.getTime(), activity.getMinutes(), activity.getDescription(), null, activity.getTrainer(), activity);
         activityRepo.save(activity);
+        calendarRepo.save(calendar);
         return new ServiceResponse<>(Optional.of(activity), "activity saved successfully");
     }
 

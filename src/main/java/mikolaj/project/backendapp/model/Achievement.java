@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -31,4 +32,15 @@ public class Achievement {
     @JoinColumn(name = "team_id", nullable = false)
     private Team team;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Achievement that)) return false;
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(place, that.place) && Objects.equals(description, that.description) && Objects.equals(date, that.date) && Objects.equals(team, that.team);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, place, description, date, team);
+    }
 }

@@ -40,7 +40,7 @@ public class CalendarController {
     }
     @GetMapping
     public ResponseEntity<?> getCalendarForTrainer(@RequestBody EntriesRequest entriesRequest){
-        ServiceResponse<?> response = calendarService.getEntriesForTrainer(entriesRequest.getTrainer(), entriesRequest.getDateRange());
+        ServiceResponse<?> response = calendarService.getEntriesForTrainer(entriesRequest.getTrainer());
         if(response.getData().isEmpty()) return ResponseUtil.badRequestResponse(response.getMessage());
         return ResponseUtil.okResponse(response.getMessage(), "Calendar", response.getData());
     }

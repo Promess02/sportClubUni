@@ -30,4 +30,10 @@ public class Member {
     public Member() {
 
     }
+
+
+    @Override
+    public String toString() {
+        return user.toString();
+    }
 }

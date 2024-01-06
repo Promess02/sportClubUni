@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Getter
 @Setter
 @Entity(name = "membership_type")
@@ -37,5 +39,17 @@ public class MembershipType {
     @Override
     public String toString() {
         return getName();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MembershipType that)) return false;
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(months, that.months) && Objects.equals(price, that.price) && Objects.equals(description, that.description) && Objects.equals(fullAccess, that.fullAccess) && Objects.equals(discount, that.discount);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, months, price, description, fullAccess, discount);
     }
 }

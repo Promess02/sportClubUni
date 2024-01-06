@@ -16,6 +16,5 @@ public interface ActivityService{
     ServiceResponse<?> getFilteredActivities(ActivityFilterForm activityFilterForm);
     ServiceResponse<List<Activity>> getAllActivities();
     ServiceResponse<?> getAllActivitiesBetweenDates(DateRange dateRange);
-
     ServiceResponse<?> checkIfActivityAvailable(Activity activity);
 }

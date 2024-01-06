@@ -7,6 +7,7 @@ import lombok.Setter;
 import mikolaj.project.backendapp.persistence.LocalDateConverter;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -41,5 +42,17 @@ public class CreditCard {
 
     public CreditCard() {
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CreditCard that)) return false;
+        return Objects.equals(id, that.id) && Objects.equals(number, that.number) && Objects.equals(cvv, that.cvv) && Objects.equals(expirationDate, that.expirationDate) && Objects.equals(bank, that.bank);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, number, cvv, expirationDate, bank);
     }
 }

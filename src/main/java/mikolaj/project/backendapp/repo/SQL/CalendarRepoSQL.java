@@ -9,15 +9,20 @@ import mikolaj.project.backendapp.repo.CalendarRepo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
 public interface CalendarRepoSQL extends JpaRepository<Calendar, Long>, CalendarRepo {
     @Override
     List<Calendar> findCalendarsByTrainer(Trainer trainer);
+    @Override
+    List<Calendar> findCalendarsByTrainerAndDate(Trainer trainer, LocalDate date);
 
     @Override
     List<Calendar> findCalendarsByMember(Member member);
     @Override
     List<Calendar> findCalendarsByActivityAndMember(Activity activity, Member member);
+    @Override
+    List<Calendar> findCalendarsByActivityAndMemberAndDate(Activity activity, Member member, LocalDate date);
 }

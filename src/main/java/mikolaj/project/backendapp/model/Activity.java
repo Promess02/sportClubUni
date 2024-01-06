@@ -1,4 +1,4 @@
-package mikolaj.project.backendapp.model;
+    package mikolaj.project.backendapp.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -87,7 +87,7 @@ public class Activity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Activity activity = (Activity) o;
-        return Objects.equals(id, activity.id) && Objects.equals(name, activity.name) && Objects.equals(date, activity.date) && Objects.equals(time, activity.time) && Objects.equals(minutes, activity.minutes) && Objects.equals(description, activity.description) && sport == activity.sport && Objects.equals(currentMembers, activity.currentMembers) && Objects.equals(memberLimit, activity.memberLimit) && Objects.equals(location, activity.location) && Objects.equals(trainer, activity.trainer) && Objects.equals(team, activity.team);
+        return Objects.equals(id, activity.id) && Objects.equals(name, activity.name) && Objects.equals(date, activity.date) && Objects.equals(time, activity.time) && Objects.equals(minutes, activity.minutes) && Objects.equals(description, activity.description) && Objects.equals(sport, activity.getSport()) && Objects.equals(currentMembers, activity.currentMembers) && Objects.equals(memberLimit, activity.memberLimit) && Objects.equals(location, activity.location) && Objects.equals(trainer, activity.trainer) && Objects.equals(team, activity.team);
     }
 
     @Override

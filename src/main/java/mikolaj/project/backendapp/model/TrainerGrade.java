@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Getter
 @Setter
 @Entity
@@ -26,6 +28,18 @@ public class TrainerGrade {
     private Byte grade;
 
     public TrainerGrade() {
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TrainerGrade that)) return false;
+        return Objects.equals(id, that.id) && Objects.equals(member, that.member) && Objects.equals(trainer, that.trainer) && Objects.equals(grade, that.grade);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, member, trainer, grade);
     }
 
     public TrainerGrade(Member member, Trainer trainer, Byte grade) {

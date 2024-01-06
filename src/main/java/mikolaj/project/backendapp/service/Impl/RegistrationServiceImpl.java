@@ -33,7 +33,6 @@ public class RegistrationServiceImpl implements RegistrationService {
 
         if (userRepository.existsByEmailIgnoreCase(user.getEmail())) {
             return new ServiceResponse<>(Optional.empty(), ServiceMessages.EMAIL_EXISTS);
-            //return ResponseEntity.badRequest().body("Error: Email is already in use!");
         }
 
         userRepository.save(user);
@@ -52,7 +51,6 @@ public class RegistrationServiceImpl implements RegistrationService {
         System.out.println("Confirmation Token: " + confirmationToken.getConfirmationToken());
 
         return new ServiceResponse<>(Optional.of(user), "Verify email by the link sent on your email address");
-        //return ResponseEntity.ok("Verify email by the link sent on your email address");
     }
 
     @Override
