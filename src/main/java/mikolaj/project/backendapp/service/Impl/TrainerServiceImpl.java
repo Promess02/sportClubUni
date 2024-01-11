@@ -1,7 +1,11 @@
 package mikolaj.project.backendapp.service.Impl;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import mikolaj.project.backendapp.DTO.ServiceResponse;
 import mikolaj.project.backendapp.DTO.TrainerInfo;
+import mikolaj.project.backendapp.enums.Sport;
 import mikolaj.project.backendapp.model.*;
 import mikolaj.project.backendapp.repo.*;
 import mikolaj.project.backendapp.service.TrainerService;
@@ -18,6 +22,8 @@ private final UserRepo userRepo;
 private final TrainerRepo trainerRepo;
 private final TrainerGradeRepo trainerGradeRepo;
 private final MemberRepo memberRepo;
+@PersistenceContext
+private EntityManager entityManager;
 private final TeamRepo teamRepo;
 private final CalendarRepo calendarRepo;
 @Autowired
@@ -30,21 +36,22 @@ private final CalendarRepo calendarRepo;
     this.calendarRepo = calendarRepo;
 }
     @Override
-    public ServiceResponse<?> addTrainer(User user, Trainer trainer) {
-        Optional<User> userDb = userRepo.findById(user.getId());
-        if(userDb.isEmpty()) {
-            //add user if he isn't already in db
-            userRepo.save(user);
-            userDb = userRepo.findByEmailIgnoreCase(user.getEmail());
-            if(userDb.isEmpty()) return new ServiceResponse<>(Optional.empty(), "failed saving user");
-        }
-        trainer.setUser(userDb.get());
+   @Transactional
+    public ServiceResponse<?> addTrainer(User user, Sport sport, Team team) {
+        Trainer trainer = new Trainer();
+        trainer.setUser(user);
+        trainer.setSpecialization(sport.toString());
+        trainer.setTeam(team);
         trainer.setGrade(0d);
         trainer.setNumOfGrades(0);
         trainer.setSumOfGrades(0);
+
+        userRepo.save(user);
         trainerRepo.save(trainer);
-        return new ServiceResponse<Object>(Optional.of(trainer), "successfully added a trainer");
-    }
+
+        return new ServiceResponse<>(Optional.of(trainer), "successfully added a trainer");
+
+}
 
 
     @Override

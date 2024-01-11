@@ -4,6 +4,7 @@ import mikolaj.project.backendapp.DTO.ServiceResponse;
 import mikolaj.project.backendapp.DTO.TrainerForm;
 import mikolaj.project.backendapp.DTO.TrainerGrade;
 import mikolaj.project.backendapp.DTO.TrainerTeam;
+import mikolaj.project.backendapp.enums.Sport;
 import mikolaj.project.backendapp.model.Trainer;
 import mikolaj.project.backendapp.model.User;
 import mikolaj.project.backendapp.service.TrainerService;
@@ -39,7 +40,7 @@ public class TrainerController {
         User user = new User(trainerForm.getName(), trainerForm.getSurname(),
                 trainerForm.getEmail(), trainerForm.getPassword(), trainerForm.getPhoneNumber());
         Trainer trainer = new Trainer(trainerForm.getSpecialization());
-        ServiceResponse<?> response = trainerService.addTrainer(user, trainer);
+        ServiceResponse<?> response = trainerService.addTrainer(user, Sport.fromValue(trainer.getSpecialization()),trainer.getTeam());
         if (response.getData().isEmpty()) return ResponseUtil.somethingWentWrongResponse(response.getMessage());
         return ResponseUtil.okResponse(response.getMessage(), "Trainer", response.getData());
     }

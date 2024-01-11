@@ -56,12 +56,14 @@ public class Activity {
     @JoinColumn(name = "team_id")
     private Team team;
 
+    @Column(name = "image_url")
+    private String imageUrl;
     public Activity() {
     }
     public Activity(String name, LocalDate date, LocalTime time,
                     Integer minutes, String description, Sport sport,
                     Integer currentMembers, Integer memberLimit, Location location,
-                    Trainer trainer, Team team) {
+                    Trainer trainer, Team team, String imageUrl) {
         this.name = name;
         this.date = date;
         this.time = time;
@@ -73,6 +75,7 @@ public class Activity {
         this.location = location;
         this.trainer = trainer;
         this.team = team;
+        this.imageUrl = imageUrl;
     }
     public void signUp(){
         currentMembers += 1;

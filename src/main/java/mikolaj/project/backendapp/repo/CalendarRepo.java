@@ -12,7 +12,7 @@ public interface CalendarRepo extends RepoTemplate<Calendar>{
     List<Calendar> findCalendarsByTrainer(Trainer trainer);
     List<Calendar> findCalendarsByMember(Member member);
     List<Calendar> findCalendarsByTrainerAndDate(Trainer trainer, LocalDate date);
-
+    List<Calendar> findCalendarsByMemberAndDate(Member member, LocalDate date);
     List<Calendar> findCalendarsByActivityAndMember(Activity activity, Member member);
     List<Calendar> findCalendarsByActivityAndMemberAndDate(Activity activity, Member member, LocalDate date);
 }

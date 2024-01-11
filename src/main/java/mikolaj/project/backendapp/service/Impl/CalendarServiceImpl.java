@@ -18,6 +18,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class CalendarServiceImpl implements CalendarService {
@@ -75,7 +76,17 @@ public class CalendarServiceImpl implements CalendarService {
     @Override
     public ServiceResponse<List<Calendar>> getEntriesForTrainer(Trainer trainer) {
         List<Calendar> list = calendarRepo.findCalendarsByTrainer(trainer);
-        return new ServiceResponse<>(Optional.of(list), "Found entries for trainer");
+        List<Calendar> distinctDateEntries = list.stream()
+                .collect(Collectors.toMap(
+                        Calendar::getDate,
+                        entry -> entry,
+                        (existing, replacement) -> existing)
+                )
+                .values()
+                .stream()
+                .toList();
+
+        return new ServiceResponse<>(Optional.of(distinctDateEntries), "Found entries for trainer");
     }
 
 

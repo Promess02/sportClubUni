@@ -22,6 +22,8 @@ public interface CalendarRepoSQL extends JpaRepository<Calendar, Long>, Calendar
     @Override
     List<Calendar> findCalendarsByMember(Member member);
     @Override
+    List<Calendar> findCalendarsByMemberAndDate(Member member, LocalDate date);
+    @Override
     List<Calendar> findCalendarsByActivityAndMember(Activity activity, Member member);
     @Override
     List<Calendar> findCalendarsByActivityAndMemberAndDate(Activity activity, Member member, LocalDate date);

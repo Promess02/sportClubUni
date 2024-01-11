@@ -27,7 +27,7 @@ public class Trainer {
     @Column(name = "num_of_grades", nullable = false)
     private Integer numOfGrades;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "team_id", nullable = false)
     private Team team;
 
@@ -68,6 +68,6 @@ public class Trainer {
 
     @Override
     public String toString() {
-        return getUser().getName() + " " + getUser().getSurname();
+        return user.toString();
     }
 }
