@@ -1,8 +1,6 @@
 package mikolaj.project.backendapp.enums;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import jakarta.el.StandardELContext;
 
 public enum StarRating {
     ONE_STAR("1 Star"), TWO_STARS("2 Stars"), THREE_STARS("3 Stars"), FOUR_STARS("4 Stars"), FIVE_STARS("5 Stars");

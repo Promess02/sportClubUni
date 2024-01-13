@@ -1,6 +1,5 @@
 package mikolaj.project.backendapp.service;
 
-import mikolaj.project.backendapp.DTO.DateRange;
 import mikolaj.project.backendapp.DTO.ServiceResponse;
 import mikolaj.project.backendapp.model.Activity;
 import mikolaj.project.backendapp.model.Calendar;

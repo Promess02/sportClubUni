@@ -1,6 +1,5 @@
 package mikolaj.project.backendapp.service.Impl;
 
-import mikolaj.project.backendapp.DTO.DateRange;
 import mikolaj.project.backendapp.DTO.ServiceResponse;
 import mikolaj.project.backendapp.model.Activity;
 import mikolaj.project.backendapp.model.Calendar;
@@ -14,10 +13,8 @@ import mikolaj.project.backendapp.service.CalendarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
