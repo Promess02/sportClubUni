@@ -8,7 +8,6 @@ import mikolaj.project.backendapp.model.Trainer;
 import mikolaj.project.backendapp.repo.ActivityRepo;
 import mikolaj.project.backendapp.repo.CalendarRepo;
 import mikolaj.project.backendapp.repo.MemberRepo;
-import mikolaj.project.backendapp.repo.TrainerRepo;
 import mikolaj.project.backendapp.service.CalendarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,15 +21,13 @@ public class CalendarServiceImpl implements CalendarService {
     private final ActivityRepo activityRepo;
     private final CalendarRepo calendarRepo;
     private final MemberRepo memberRepo;
-    private final TrainerRepo trainerRepo;
     @Autowired
     public CalendarServiceImpl(ActivityRepo activityRepo,
                                CalendarRepo calendarRepo,
-                               MemberRepo memberRepo, TrainerRepo trainerRepo) {
+                               MemberRepo memberRepo) {
         this.activityRepo = activityRepo;
         this.calendarRepo = calendarRepo;
         this.memberRepo = memberRepo;
-        this.trainerRepo = trainerRepo;
     }
 
     @Override

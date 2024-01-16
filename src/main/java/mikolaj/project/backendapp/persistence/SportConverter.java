@@ -6,13 +6,10 @@ import mikolaj.project.backendapp.enums.Sport;
 
 @Converter(autoApply = true)
 public class SportConverter implements AttributeConverter<Sport, String> {
-
-
     @Override
     public String convertToDatabaseColumn(Sport sport) {
         return sport.getName();
     }
-
     @Override
     public Sport convertToEntityAttribute(String s) {
         return Sport.fromValue(s);
