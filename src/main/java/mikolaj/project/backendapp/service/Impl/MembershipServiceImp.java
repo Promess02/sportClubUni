@@ -51,8 +51,8 @@ public class MembershipServiceImp implements MembershipService {
     }
 
     @Override
-    public ServiceResponse<?> buyMembership(String userEmail, String membershipDescription, String activityName) {
-        ServiceResponse<?> response = checkIfUserEmailOk(userEmail);
+    public ServiceResponse<Membership> buyMembership(String userEmail, String membershipDescription, String activityName) {
+        ServiceResponse<Membership> response = checkIfUserEmailOk(userEmail);
         if(!response.getMessage().equals("email OK")) return response;
         Optional<User> userDb = userRepo.findByEmailIgnoreCase(userEmail);
         Optional<Member> member = memberRepo.findMemberByUserId(userDb.get().getId());
@@ -61,8 +61,6 @@ public class MembershipServiceImp implements MembershipService {
             memberRepo.save(newMember);
             member = Optional.of(newMember);
         }
-        Optional<Membership> membership = membershipRepo.findMembershipByMemberIdAndMembershipStatusEquals(member.get().getId(), MembershipStatus.ACTIVE);
-        if(membership.isPresent()) return new ServiceResponse<>(Optional.empty(),"member has an active membership already");
         Optional<MembershipType> membershipType = membershipTypeRepo.findMembershipTypeByDescription(membershipDescription);
         if(membershipType.isEmpty()) return new ServiceResponse<>(Optional.empty(), "No membership type found with given description");
         Optional<Activity> activity = activityRepo.findActivityByName(activityName);
@@ -72,6 +70,12 @@ public class MembershipServiceImp implements MembershipService {
         LocalDate membershipEndDate = LocalDate.now().plusMonths(membershipType.get().getMonths());
         Membership newMembership = new Membership(membershipEndDate, MembershipStatus.ACTIVE,member.get(),membershipType.get(),
                 activity.orElse(null));
+        Optional<Membership> membership = membershipRepo.findMembershipByMemberIdAndMembershipStatusEquals(member.get().getId(), MembershipStatus.ACTIVE);
+        if(membership.isPresent()) {
+            Membership membershipOld = membership.get();
+            membershipOld.setMembershipStatus(MembershipStatus.EXPIRED);
+            membershipRepo.save(membershipOld);
+        }
         membershipRepo.save(newMembership);
         return new ServiceResponse<>(Optional.of(newMembership), "Membership successfully bought");
     }
