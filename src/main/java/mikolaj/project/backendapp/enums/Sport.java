@@ -5,7 +5,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum Sport{
     TENNIS("Tennis"), KARATE("Karate"), JIU_JITSU("Jiu-jitsu"), BOXING("boxing"),
-    KICKBOXING("kickboxing"), BASKETBALL("Basketball"), MUAY_THAI("Muay-Thai"), MMA("MMA");
+    KICKBOXING("kickboxing"), BASKETBALL("Basketball"), MUAY_THAI("Muay-Thai"), MMA("MMA"),
+    FOOTBALL("football"), RUNNING("running"), VOLEYBALL("voleyball"), TABLE("table"), HANDBALL("handball"), SWIMMING("swimming");
     private final String name;
 
     Sport(String name) {
