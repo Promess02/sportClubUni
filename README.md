@@ -26,3 +26,5 @@ spring:
             enable: true
 
 guide on Spring email: https://www.baeldung.com/spring-email
+
+Short project documentation in Polish: https://mckpk-my.sharepoint.com/:b:/g/personal/mikolaj_michalczyk_student_pk_edu_pl/EZBNvablyiBMpT04TxT_oM0BtWso5QgAZfjdx4A2JuKx4w?e=7vHb15
