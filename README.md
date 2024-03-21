@@ -1,4 +1,4 @@
-Server module of a Sport Club System Application built using Spring Boot, Hibernate and MySQL. Developed as an university project for education purposes.
+Server module of a Sport Club System Application built using Spring Boot, Hibernate and MySQL. Developed as an university project for educational purposes.
 System uses MVC architecture and handles functionalities like Membership, Activities, Calendars, Teams, News Posts, providing information about the club etc.
 It was also developed to register and handle users with varying priveleges: guest user, user without club membership, user with club membership, trainer, admin.
 
